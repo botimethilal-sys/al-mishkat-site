@@ -1,0 +1,707 @@
+openapi: 3.1.0
+info:
+  title: Api
+  version: 0.1.0
+  description: Al-Mishkat Educational Platform API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: subjects
+    description: Islamic study subjects
+  - name: pillars
+    description: Five Pillars of Islam
+  - name: videos
+    description: Video content
+  - name: pdfs
+    description: PDF library
+  - name: images
+    description: Reading room images
+  - name: quizzes
+    description: Exam center quizzes
+  - name: questions
+    description: Q&A submissions
+  - name: search
+    description: Search across content
+  - name: feed
+    description: Latest feed items
+  - name: storage
+    description: Object storage file uploads
+  - name: admin
+    description: Admin content management
+paths:
+  /storage/uploads/request-url:
+    post:
+      operationId: requestUploadUrl
+      tags: [storage]
+      summary: Request a presigned upload URL
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RequestUploadUrlBody"
+      responses:
+        "200":
+          description: Presigned upload URL
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequestUploadUrlResponse"
+
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /subjects:
+    get:
+      operationId: listSubjects
+      tags: [subjects]
+      summary: List all 6 core subjects
+      responses:
+        "200":
+          description: List of subjects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Subject"
+
+  /subjects/{subjectId}:
+    get:
+      operationId: getSubject
+      tags: [subjects]
+      summary: Get a subject by ID
+      parameters:
+        - name: subjectId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Subject details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subject"
+
+  /subjects/{subjectId}/videos:
+    get:
+      operationId: listSubjectVideos
+      tags: [videos]
+      summary: List videos for a subject
+      parameters:
+        - name: subjectId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [reel, short, lecture]
+      responses:
+        "200":
+          description: List of videos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/VideoItem"
+
+  /subjects/{subjectId}/pdfs:
+    get:
+      operationId: listSubjectPdfs
+      tags: [pdfs]
+      summary: List PDF documents for a subject
+      parameters:
+        - name: subjectId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of PDFs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PdfItem"
+
+  /subjects/{subjectId}/images:
+    get:
+      operationId: listSubjectImages
+      tags: [images]
+      summary: List reading room images for a subject
+      parameters:
+        - name: subjectId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of book image snippets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ImageSnippet"
+
+  /subjects/{subjectId}/quizzes:
+    get:
+      operationId: listSubjectQuizzes
+      tags: [quizzes]
+      summary: List quizzes for a subject
+      parameters:
+        - name: subjectId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of quizzes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Quiz"
+
+  /subjects/{subjectId}/questions:
+    post:
+      operationId: submitSubjectQuestion
+      tags: [questions]
+      summary: Submit a question for a subject
+      parameters:
+        - name: subjectId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubmitQuestionBody"
+      responses:
+        "201":
+          description: Question submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuestionSubmission"
+
+  /pillars:
+    get:
+      operationId: listPillars
+      tags: [pillars]
+      summary: List the Five Pillars of Islam
+      responses:
+        "200":
+          description: List of pillars
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Pillar"
+
+  /pillars/{pillarId}:
+    get:
+      operationId: getPillar
+      tags: [pillars]
+      summary: Get a pillar by ID with its content
+      parameters:
+        - name: pillarId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Pillar details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PillarDetail"
+
+  /pillars/{pillarId}/questions:
+    post:
+      operationId: submitPillarQuestion
+      tags: [questions]
+      summary: Submit a question for a pillar
+      parameters:
+        - name: pillarId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubmitQuestionBody"
+      responses:
+        "201":
+          description: Question submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuestionSubmission"
+
+  /quizzes/{quizId}/submit:
+    post:
+      operationId: submitQuizAttempt
+      tags: [quizzes]
+      summary: Submit quiz answers and receive a score
+      parameters:
+        - name: quizId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuizAttemptBody"
+      responses:
+        "200":
+          description: Quiz result with score and feedback
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuizResult"
+
+  /search:
+    get:
+      operationId: searchContent
+      tags: [search]
+      summary: Search across all content
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [video, pdf, image, quiz, pillar, subject]
+      responses:
+        "200":
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchResults"
+
+  /feed:
+    get:
+      operationId: getLatestFeed
+      tags: [feed]
+      summary: Get latest feed items (videos and images)
+      responses:
+        "200":
+          description: Latest feed
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FeedItem"
+
+  /stats:
+    get:
+      operationId: getPlatformStats
+      tags: [feed]
+      summary: Get platform statistics summary
+      responses:
+        "200":
+          description: Platform stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlatformStats"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required: [status]
+
+    Subject:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        arabicName:
+          type: string
+        description:
+          type: string
+        icon:
+          type: string
+        color:
+          type: string
+        videoCount:
+          type: integer
+        pdfCount:
+          type: integer
+        imageCount:
+          type: integer
+        quizCount:
+          type: integer
+      required: [id, name, arabicName, description, icon, color, videoCount, pdfCount, imageCount, quizCount]
+
+    VideoItem:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+          enum: [reel, short, lecture]
+        duration:
+          type: string
+        thumbnailUrl:
+          type: string
+        videoUrl:
+          type: string
+        subjectId:
+          type: string
+        uploadedAt:
+          type: string
+      required: [id, title, description, type, duration, thumbnailUrl, videoUrl, subjectId, uploadedAt]
+
+    PdfItem:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+          enum: [summary, handout, notes, reference]
+        fileSize:
+          type: string
+        pageCount:
+          type: integer
+        downloadUrl:
+          type: string
+        subjectId:
+          type: string
+        uploadedAt:
+          type: string
+      required: [id, title, description, category, fileSize, pageCount, downloadUrl, subjectId, uploadedAt]
+
+    ImageSnippet:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        bookTitle:
+          type: string
+        author:
+          type: string
+        pageRange:
+          type: string
+        imageUrl:
+          type: string
+        downloadUrl:
+          type: string
+        subjectId:
+          type: string
+      required: [id, title, bookTitle, author, pageRange, imageUrl, downloadUrl, subjectId]
+
+    Quiz:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        subjectId:
+          type: string
+        questionCount:
+          type: integer
+        passThreshold:
+          type: integer
+        difficulty:
+          type: string
+          enum: [beginner, intermediate, advanced]
+        questions:
+          type: array
+          items:
+            $ref: "#/components/schemas/QuizQuestion"
+      required: [id, title, description, subjectId, questionCount, passThreshold, difficulty, questions]
+
+    QuizQuestion:
+      type: object
+      properties:
+        id:
+          type: string
+        question:
+          type: string
+        options:
+          type: array
+          items:
+            type: string
+        correctIndex:
+          type: integer
+        explanation:
+          type: string
+      required: [id, question, options, correctIndex, explanation]
+
+    QuizAttemptBody:
+      type: object
+      properties:
+        answers:
+          type: array
+          items:
+            type: object
+            properties:
+              questionId:
+                type: string
+              selectedIndex:
+                type: integer
+            required: [questionId, selectedIndex]
+      required: [answers]
+
+    QuizResult:
+      type: object
+      properties:
+        quizId:
+          type: string
+        score:
+          type: integer
+        totalQuestions:
+          type: integer
+        percentage:
+          type: number
+        passed:
+          type: boolean
+        feedback:
+          type: array
+          items:
+            type: object
+            properties:
+              questionId:
+                type: string
+              correct:
+                type: boolean
+              explanation:
+                type: string
+            required: [questionId, correct, explanation]
+      required: [quizId, score, totalQuestions, percentage, passed, feedback]
+
+    Pillar:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        arabicName:
+          type: string
+        order:
+          type: integer
+        shortDescription:
+          type: string
+        icon:
+          type: string
+      required: [id, name, arabicName, order, shortDescription, icon]
+
+    PillarDetail:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        arabicName:
+          type: string
+        order:
+          type: integer
+        description:
+          type: string
+        arabicText:
+          type: string
+        videos:
+          type: array
+          items:
+            $ref: "#/components/schemas/VideoItem"
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+              url:
+                type: string
+              description:
+                type: string
+            required: [title, url, description]
+      required: [id, name, arabicName, order, description, arabicText, videos, links]
+
+    SubmitQuestionBody:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        question:
+          type: string
+      required: [name, question]
+
+    QuestionSubmission:
+      type: object
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+        submittedAt:
+          type: string
+      required: [id, message, submittedAt]
+
+    SearchResults:
+      type: object
+      properties:
+        query:
+          type: string
+        totalResults:
+          type: integer
+        videos:
+          type: array
+          items:
+            $ref: "#/components/schemas/VideoItem"
+        pdfs:
+          type: array
+          items:
+            $ref: "#/components/schemas/PdfItem"
+        images:
+          type: array
+          items:
+            $ref: "#/components/schemas/ImageSnippet"
+        subjects:
+          type: array
+          items:
+            $ref: "#/components/schemas/Subject"
+        pillars:
+          type: array
+          items:
+            $ref: "#/components/schemas/Pillar"
+      required: [query, totalResults, videos, pdfs, images, subjects, pillars]
+
+    FeedItem:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [video, image, pdf]
+        title:
+          type: string
+        description:
+          type: string
+        thumbnailUrl:
+          type: string
+        subjectId:
+          type: string
+        subjectName:
+          type: string
+        createdAt:
+          type: string
+      required: [id, type, title, description, thumbnailUrl, subjectId, subjectName, createdAt]
+
+    PlatformStats:
+      type: object
+      properties:
+        totalVideos:
+          type: integer
+        totalPdfs:
+          type: integer
+        totalImages:
+          type: integer
+        totalQuizzes:
+          type: integer
+        totalSubjects:
+          type: integer
+        totalPillars:
+          type: integer
+      required: [totalVideos, totalPdfs, totalImages, totalQuizzes, totalSubjects, totalPillars]
+
+    RequestUploadUrlBody:
+      type: object
+      properties:
+        name:
+          type: string
+        size:
+          type: integer
+        contentType:
+          type: string
+      required: [name, size, contentType]
+
+    RequestUploadUrlResponse:
+      type: object
+      properties:
+        uploadURL:
+          type: string
+        objectPath:
+          type: string
+        metadata:
+          type: object
+          properties:
+            name:
+              type: string
+            size:
+              type: integer
+            contentType:
+              type: string
+          required: [name, size, contentType]
+      required: [uploadURL, objectPath, metadata]
