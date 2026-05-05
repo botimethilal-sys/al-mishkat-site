@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Al-Mishkat — User Manual</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #fff;
+      color: #1C1917;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .cover {
+      background: #064E3B;
+      color: #FDFCF0;
+      padding: 70px 50px;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      page-break-after: always;
+    }
+    .cover h1 { font-size: 46px; margin-bottom: 10px; letter-spacing: -1px; }
+    .cover .arabic { font-size: 32px; color: #D97706; margin-bottom: 30px; }
+    .cover p { font-size: 17px; color: #d4cfc0; max-width: 500px; margin: 0 auto; }
+    .cover .subtitle { font-size: 22px; color: #D97706; margin-top: 16px; font-style: italic; }
+    .cover .version { font-size: 13px; color: #7aab90; margin-top: 40px; }
+    .content { max-width: 760px; margin: 0 auto; padding: 50px 30px; }
+    h2 {
+      font-size: 24px;
+      color: #064E3B;
+      border-bottom: 3px solid #D97706;
+      padding-bottom: 8px;
+      margin: 48px 0 18px;
+    }
+    h3 { font-size: 17px; color: #064E3B; margin: 26px 0 10px; font-style: italic; }
+    p { margin-bottom: 13px; color: #2a2520; }
+    ul, ol { margin: 10px 0 18px 26px; }
+    li { margin-bottom: 8px; color: #2a2520; }
+    .step {
+      background: #F5F3E8;
+      border-left: 5px solid #064E3B;
+      padding: 14px 20px;
+      margin: 12px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .step strong { color: #064E3B; }
+    .tip {
+      background: #FFFBEF;
+      border-left: 5px solid #D97706;
+      padding: 12px 18px;
+      margin: 14px 0;
+      border-radius: 0 8px 8px 0;
+      font-size: 14px;
+    }
+    .tip strong { color: #92400e; }
+    .warn {
+      background: #FEF2F2;
+      border-left: 5px solid #dc2626;
+      padding: 12px 18px;
+      margin: 14px 0;
+      border-radius: 0 8px 8px 0;
+      font-size: 14px;
+    }
+    .warn strong { color: #991b1b; }
+    .section-divider {
+      border: none;
+      border-top: 1px solid #E2DEC8;
+      margin: 40px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 26px;
+      font-size: 14px;
+    }
+    th {
+      background: #064E3B;
+      color: #FDFCF0;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: normal;
+      letter-spacing: 0.3px;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #E2DEC8;
+      vertical-align: top;
+    }
+    tr:nth-child(even) td { background: #FAFAF5; }
+    .badge {
+      display: inline-block;
+      background: #064E3B;
+      color: #FDFCF0;
+      border-radius: 5px;
+      padding: 2px 9px;
+      font-size: 12px;
+      font-family: sans-serif;
+      vertical-align: middle;
+    }
+    .badge.gold { background: #D97706; }
+    .toc {
+      background: #F5F3E8;
+      border-radius: 10px;
+      padding: 24px 32px;
+      margin: 30px 0 40px;
+      border: 1px solid #E2DEC8;
+    }
+    .toc h3 { margin-top: 0; font-style: normal; font-size: 18px; margin-bottom: 14px; }
+    .toc ol { margin-left: 22px; }
+    .toc li { margin-bottom: 7px; }
+    .toc a { color: #064E3B; text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    .page-break { page-break-before: always; }
+    .num-circle {
+      display: inline-flex;
+      width: 28px; height: 28px;
+      background: #064E3B;
+      color: white;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      margin-right: 8px;
+      vertical-align: middle;
+      font-family: sans-serif;
+    }
+    @media print {
+      .page-break { page-break-before: always; }
+      a { color: inherit; text-decoration: none; }
+    }
+    @media (max-width: 600px) {
+      .cover { padding: 40px 24px; }
+      .content { padding: 30px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover">
+  <div class="arabic">المشكاة</div>
+  <h1>Al-Mishkat</h1>
+  <div class="subtitle">Complete User Manual</div>
+  <br /><br />
+  <p>How to use your Islamic educational platform — logging into the Admin panel, uploading videos with thumbnail images, adding PDFs, assigning content to the right subject, and managing the content library.</p>
+  <div class="version">Version 2.0 &nbsp;·&nbsp; Al-Mishkat Educational Platform</div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <div class="toc">
+    <h3>Table of Contents</h3>
+    <ol>
+      <li><a href="#overview">Platform Overview</a></li>
+      <li><a href="#navigation">Navigating the Website</a></li>
+      <li><a href="#subjects">The 6 Subject Modules</a></li>
+      <li><a href="#login">Logging into the Admin Panel</a></li>
+      <li><a href="#upload-video">How to Upload a Video (with Thumbnail)</a></li>
+      <li><a href="#upload-pdf">How to Upload a PDF</a></li>
+      <li><a href="#examples">Step-by-Step Examples</a></li>
+      <li><a href="#library">Managing the Content Library</a></li>
+      <li><a href="#pillars">The Five Pillars Pages</a></li>
+      <li><a href="#search">Using the Search</a></li>
+      <li><a href="#tips">Tips &amp; Quick Reference</a></li>
+    </ol>
+  </div>
+
+  <!-- 1. OVERVIEW -->
+  <h2 id="overview">1. Platform Overview</h2>
+  <p>Al-Mishkat is your Islamic educational website. It has two parts:</p>
+  <ul>
+    <li><strong>The public website</strong> — what all visitors see: subject pages, video hubs, PDF libraries, quizzes, and the Five Pillars. No login needed to browse.</li>
+    <li><strong>The Admin panel</strong> — your private, password-protected area where you upload and manage content. Everything you upload immediately appears live on the website.</li>
+  </ul>
+  <p>When you upload a video or PDF and assign it to a subject (e.g., Aqidah), it automatically appears in that subject's Video Hub or PDF Library for visitors to find.</p>
+
+  <hr class="section-divider" />
+
+  <!-- 2. NAVIGATION -->
+  <h2 id="navigation">2. Navigating the Website</h2>
+  <p>The navigation bar at the top of every page contains these links:</p>
+  <table>
+    <tr><th>Link</th><th>What it does</th></tr>
+    <tr><td><strong>Home</strong></td><td>The homepage — shows platform stats, Five Pillars cards, and the Latest Additions feed.</td></tr>
+    <tr><td><strong>Subjects</strong></td><td>All 6 Islamic subject modules (Aqidah, Tafsir, Hadith, Fiqh, Tarbiyah, Sirah).</td></tr>
+    <tr><td><strong>5 Pillars</strong></td><td>The Five Pillars of Islam — click any pillar to read its full page.</td></tr>
+    <tr><td><strong>Admin</strong></td><td>The password-protected content management area where you upload videos and PDFs.</td></tr>
+    <tr><td><em>Search bar</em></td><td>Search for any video, PDF, or topic across the whole platform.</td></tr>
+  </table>
+
+  <hr class="section-divider" />
+
+  <!-- 3. SUBJECTS -->
+  <h2 id="subjects">3. The 6 Subject Modules</h2>
+  <p>Each subject has its own page with four sections (tabs):</p>
+  <table>
+    <tr><th>Tab</th><th>What it contains</th></tr>
+    <tr><td><strong>Video Hub</strong></td><td>All videos uploaded for that subject — lectures, shorts, and reels.</td></tr>
+    <tr><td><strong>PDF Library</strong></td><td>All PDFs uploaded for that subject — books, articles, notes, worksheets.</td></tr>
+    <tr><td><strong>Reading Room</strong></td><td>Extended study text and reading materials.</td></tr>
+    <tr><td><strong>Exam Center</strong></td><td>Quizzes and assessments for that subject.</td></tr>
+  </table>
+
+  <p>The 6 subjects you can assign content to:</p>
+  <table>
+    <tr><th>Subject Name</th><th>Arabic</th><th>What it covers</th></tr>
+    <tr><td><strong>Aqidah</strong></td><td>العقيدة</td><td>Islamic theology and creed (Tawhid, pillars of faith)</td></tr>
+    <tr><td><strong>Tafsir</strong></td><td>التفسير</td><td>Quranic exegesis and interpretation</td></tr>
+    <tr><td><strong>Hadith</strong></td><td>الحديث</td><td>Prophetic sayings, actions, and Hadith sciences</td></tr>
+    <tr><td><strong>Fiqh</strong></td><td>الفقه</td><td>Islamic jurisprudence and rulings</td></tr>
+    <tr><td><strong>Tarbiyah</strong></td><td>التربية</td><td>Islamic character, manners, and spiritual development</td></tr>
+    <tr><td><strong>Sirah</strong></td><td>السيرة</td><td>Biography of the Prophet Muhammad ﷺ</td></tr>
+  </table>
+
+  <hr class="section-divider" />
+
+  <!-- 4. LOGIN -->
+  <div class="page-break"></div>
+  <h2 id="login">4. Logging into the Admin Panel</h2>
+  <p>The Admin panel is protected by a password. Only someone who knows the password can upload or delete content.</p>
+
+  <h3>How to log in:</h3>
+  <div class="step"><strong>Step 1:</strong> Click <span class="badge">Admin</span> in the top navigation bar (between "5 Pillars" and the search bar).</div>
+  <div class="step"><strong>Step 2:</strong> You will see the Al-Mishkat Admin login screen with a password field.</div>
+  <div class="step"><strong>Step 3:</strong> Type your admin password in the field. You can click the eye icon 👁 on the right to show or hide the characters as you type.</div>
+  <div class="step"><strong>Step 4:</strong> Click <strong>"Enter Admin Panel"</strong>. If the password is correct, you will be taken directly to the Content Management area.</div>
+
+  <div class="tip">
+    <strong>Tip — Stay logged in:</strong> Once you log in, you stay logged in for the rest of your browser session. You do not need to re-enter the password every time you visit the Admin page, as long as you keep the browser tab open.
+  </div>
+
+  <h3>How to lock the Admin panel:</h3>
+  <p>When you are finished uploading and want to secure the panel, click the <strong>"Lock"</strong> button at the top right of the Content Management page. This immediately returns to the password screen.</p>
+  <p>The Admin panel also locks automatically when you close your browser or open a fresh browser session.</p>
+
+  <div class="warn">
+    <strong>If you forget your password:</strong> The password is stored in the Replit Secrets settings of your project. Contact your developer to reset it.
+  </div>
+
+  <hr class="section-divider" />
+
+  <!-- 5. UPLOAD VIDEO -->
+  <h2 id="upload-video">5. How to Upload a Video (with Thumbnail)</h2>
+  <p>Follow these steps to add a video that will appear in a subject's Video Hub tab.</p>
+
+  <div class="step"><strong>Step 1 — Log into Admin:</strong> Click <span class="badge">Admin</span> in the header and enter your password.</div>
+  <div class="step"><strong>Step 2 — "Upload Video" tab:</strong> It is the first tab — selected by default when you open the Admin panel.</div>
+  <div class="step"><strong>Step 3 — Select your video file:</strong> Click the left upload area labelled "Click to select video". Choose an MP4, MOV, AVI, or WebM file from your computer.</div>
+  <div class="step"><strong>Step 4 — Add a thumbnail image (recommended):</strong> Click the right upload area labelled "Click to add thumbnail". Choose a JPG, PNG, or WebP image. This image will appear as the preview card for your video on the subject page. If you skip this, a generic icon is shown instead.</div>
+  <div class="step"><strong>Step 5 — Enter the Title:</strong> Type a clear title, e.g. <em>"Introduction to Aqidah — Part 1"</em>.</div>
+  <div class="step"><strong>Step 6 — Select the Subject:</strong> Click the Subject dropdown and choose where this video belongs (Aqidah, Tafsir, Hadith, Fiqh, Tarbiyah, or Sirah).</div>
+  <div class="step"><strong>Step 7 — Choose the Type:</strong>
+    <ul style="margin-top:8px;">
+      <li><strong>Lecture</strong> — Full-length educational talk (typically 20 minutes or longer)</li>
+      <li><strong>Short</strong> — A focused clip (3–20 minutes)</li>
+      <li><strong>Reel</strong> — A very short social-style clip (under 3 minutes)</li>
+    </ul>
+  </div>
+  <div class="step"><strong>Step 8 — Enter Duration (optional):</strong> Type the video length, e.g. <em>"45:00"</em> or <em>"1 hour 20 min"</em>.</div>
+  <div class="step"><strong>Step 9 — Write a Description (optional):</strong> A brief summary of what the video covers. This helps visitors know what to expect.</div>
+  <div class="step"><strong>Step 10 — Click "Upload Video":</strong> A progress bar will appear. It uploads the video first, then the thumbnail (if added), then saves the details. A green confirmation appears when done.</div>
+
+  <div class="tip">
+    <strong>After uploading:</strong> Go to <strong>Subjects → (your subject) → Video Hub</strong> to confirm your video card appears with its thumbnail.
+  </div>
+
+  <hr class="section-divider" />
+
+  <!-- 6. UPLOAD PDF -->
+  <h2 id="upload-pdf">6. How to Upload a PDF</h2>
+  <p>Follow these steps to add a PDF that will appear in a subject's PDF Library tab.</p>
+
+  <div class="step"><strong>Step 1 — Log into Admin:</strong> Click <span class="badge">Admin</span> in the header and enter your password.</div>
+  <div class="step"><strong>Step 2 — Click "Upload PDF" tab:</strong> The second tab in the Admin panel (next to "Upload Video").</div>
+  <div class="step"><strong>Step 3 — Select your PDF file:</strong> Click the upload area and select a .PDF file from your computer.</div>
+  <div class="step"><strong>Step 4 — Enter the Title:</strong> For example: <em>"Aqidah al-Wasitiyyah — Arabic Text"</em>.</div>
+  <div class="step"><strong>Step 5 — Select the Subject:</strong> Choose from the dropdown — Aqidah, Tafsir, Hadith, Fiqh, Tarbiyah, or Sirah.</div>
+  <div class="step"><strong>Step 6 — Choose the Category:</strong>
+    <ul style="margin-top:8px;">
+      <li><strong>Book</strong> — A complete Islamic book or classical text</li>
+      <li><strong>Article</strong> — A scholarly or academic paper</li>
+      <li><strong>Notes</strong> — Study notes or summaries</li>
+      <li><strong>Worksheet</strong> — Exercises or student worksheets</li>
+    </ul>
+  </div>
+  <div class="step"><strong>Step 7 — Enter Page Count (optional):</strong> How many pages the document has.</div>
+  <div class="step"><strong>Step 8 — Write a Description (optional):</strong> What is this PDF about?</div>
+  <div class="step"><strong>Step 9 — Click "Upload PDF":</strong> Wait for the upload bar to complete. A green success message will appear.</div>
+
+  <div class="tip">
+    <strong>After uploading:</strong> Go to <strong>Subjects → (your subject) → PDF Library</strong> to verify your document is listed.
+  </div>
+
+  <hr class="section-divider" />
+
+  <!-- 7. EXAMPLES -->
+  <div class="page-break"></div>
+  <h2 id="examples">7. Step-by-Step Examples</h2>
+
+  <h3><span class="num-circle">A</span> Upload a PDF to Aqidah</h3>
+  <p><em>Goal: Add "Kitab al-Tawhid" to the Aqidah subject.</em></p>
+  <ol>
+    <li>Click <span class="badge">Admin</span> in the header → enter your password → click "Enter Admin Panel".</li>
+    <li>Click the <strong>Upload PDF</strong> tab.</li>
+    <li>Click the upload area → select the PDF file from your computer.</li>
+    <li>Title: <strong>Kitab al-Tawhid</strong></li>
+    <li>Subject: <strong>Aqidah</strong></li>
+    <li>Category: <strong>Book</strong></li>
+    <li>Page Count: <strong>120</strong></li>
+    <li>Description: <em>"The foundational text on Islamic monotheism by Shaykh Muhammad ibn Abd al-Wahhab."</em></li>
+    <li>Click <strong>Upload PDF</strong> → wait for the green success message.</li>
+    <li>Go to <strong>Subjects → Aqidah → PDF Library</strong> — your book now appears!</li>
+  </ol>
+
+  <hr class="section-divider" />
+
+  <h3><span class="num-circle">B</span> Upload a Reel Video to Fiqh</h3>
+  <p><em>Goal: Add a short Reel video about prayer times to the Fiqh subject.</em></p>
+  <ol>
+    <li>Click <span class="badge">Admin</span> → enter password → click "Enter Admin Panel".</li>
+    <li>The <strong>Upload Video</strong> tab is already open.</li>
+    <li>Click the left upload area → select your MP4 video file.</li>
+    <li>(Optional) Click the right upload area → select a thumbnail image (e.g. a photo of a mosque).</li>
+    <li>Title: <strong>Prayer Times — A Quick Guide</strong></li>
+    <li>Subject: <strong>Fiqh</strong></li>
+    <li>Type: <strong>Reel</strong></li>
+    <li>Duration: <strong>2:30</strong></li>
+    <li>Description: <em>"A quick visual guide to understanding and calculating prayer times."</em></li>
+    <li>Click <strong>Upload Video</strong> → wait for success.</li>
+    <li>Go to <strong>Subjects → Fiqh → Video Hub</strong> — your reel now appears with its thumbnail!</li>
+  </ol>
+
+  <hr class="section-divider" />
+
+  <h3><span class="num-circle">C</span> Upload a Lecture Video to Hadith</h3>
+  <p><em>Goal: Add a full-length lecture on Hadith sciences.</em></p>
+  <ol>
+    <li>Click <span class="badge">Admin</span> → enter password → click "Enter Admin Panel".</li>
+    <li>Click the left upload area → select your video file.</li>
+    <li>Add a thumbnail image in the right upload area (e.g. a cover slide image).</li>
+    <li>Title: <strong>Introduction to Hadith Sciences — Part 1</strong></li>
+    <li>Subject: <strong>Hadith</strong></li>
+    <li>Type: <strong>Lecture</strong></li>
+    <li>Duration: <strong>55:00</strong></li>
+    <li>Click <strong>Upload Video</strong>.</li>
+    <li>Go to <strong>Subjects → Hadith → Video Hub</strong> to confirm.</li>
+  </ol>
+
+  <hr class="section-divider" />
+
+  <h3><span class="num-circle">D</span> Upload Study Notes to Sirah</h3>
+  <p><em>Goal: Add a PDF of class notes about the Prophet's ﷺ early life to Sirah.</em></p>
+  <ol>
+    <li>Click <span class="badge">Admin</span> → enter password → click "Enter Admin Panel".</li>
+    <li>Click the <strong>Upload PDF</strong> tab.</li>
+    <li>Select your notes PDF.</li>
+    <li>Title: <strong>The Makkan Period — Class Notes</strong></li>
+    <li>Subject: <strong>Sirah</strong></li>
+    <li>Category: <strong>Notes</strong></li>
+    <li>Click <strong>Upload PDF</strong> and wait for success.</li>
+    <li>Go to <strong>Subjects → Sirah → PDF Library</strong> to verify.</li>
+  </ol>
+
+  <hr class="section-divider" />
+
+  <!-- 8. CONTENT LIBRARY -->
+  <div class="page-break"></div>
+  <h2 id="library">8. Managing the Content Library</h2>
+  <p>The <strong>Content Library</strong> tab (third tab in the Admin panel) shows everything that has been uploaded to the database so far.</p>
+
+  <h3>What you can do:</h3>
+  <ul>
+    <li><strong>View all videos</strong> — see every uploaded video with its subject, type, and duration.</li>
+    <li><strong>View all PDFs</strong> — see every uploaded PDF with its subject, category, and page count.</li>
+    <li><strong>Delete content</strong> — click the red bin icon next to any item to permanently remove it from the database and the website.</li>
+  </ul>
+
+  <div class="warn">
+    <strong>Warning:</strong> Deleting an item from the Content Library removes it from the website immediately and permanently. There is no undo. Always double-check before deleting.
+  </div>
+
+  <div class="tip">
+    <strong>Tip — Wrong subject?</strong> If you uploaded a file to the wrong subject, delete it from the Content Library and re-upload it with the correct subject selected.
+  </div>
+
+  <hr class="section-divider" />
+
+  <!-- 9. PILLARS -->
+  <h2 id="pillars">9. The Five Pillars Pages</h2>
+  <p>Click <strong>5 Pillars</strong> in the navigation bar to see the list of all Five Pillars. Click any pillar card to open its full detail page, which includes a description, Quranic references, and a Q&amp;A section.</p>
+
+  <table>
+    <tr><th>#</th><th>Pillar</th><th>Arabic</th><th>Meaning</th></tr>
+    <tr><td>1</td><td>Shahadah</td><td>الشهادة</td><td>Declaration of Faith</td></tr>
+    <tr><td>2</td><td>Salah</td><td>الصلاة</td><td>The Five Daily Prayers</td></tr>
+    <tr><td>3</td><td>Zakat</td><td>الزكاة</td><td>Obligatory Charity</td></tr>
+    <tr><td>4</td><td>Sawm</td><td>الصوم</td><td>Fasting in Ramadan</td></tr>
+    <tr><td>5</td><td>Hajj</td><td>الحج</td><td>Pilgrimage to Makkah</td></tr>
+  </table>
+
+  <hr class="section-divider" />
+
+  <!-- 10. SEARCH -->
+  <h2 id="search">10. Using the Search</h2>
+  <p>The search bar is at the top right of every page. Type any keyword — a topic, subject name, scholar name, or title — and press <strong>Enter</strong>. The search results page will show matching videos, PDFs, and other content from across the platform.</p>
+
+  <hr class="section-divider" />
+
+  <!-- 11. TIPS -->
+  <div class="page-break"></div>
+  <h2 id="tips">11. Tips &amp; Quick Reference</h2>
+
+  <div class="tip"><strong>Best video format:</strong> Use MP4 for best compatibility across all devices and browsers.</div>
+  <div class="tip"><strong>Best thumbnail size:</strong> Use a 16:9 image (e.g. 1280×720 pixels or 1920×1080 pixels) for the best appearance on video cards.</div>
+  <div class="tip"><strong>Best PDF format:</strong> Always use .PDF files. Scanned documents work fine as long as they are saved as PDF.</div>
+  <div class="tip"><strong>Content goes live immediately:</strong> As soon as an upload succeeds and you see the green confirmation, the content is live on the website. No separate publishing step needed.</div>
+  <div class="tip"><strong>Changing your password:</strong> Your admin password is stored in the Replit Secrets panel. Contact your developer to update it, or you can change it yourself in the Secrets tab if you have access to the Replit project.</div>
+  <div class="tip"><strong>Locking the panel:</strong> Always click the <strong>Lock</strong> button (top right of the Admin panel) when you are done uploading, especially if others can access your computer.</div>
+
+  <h3>Quick Reference — Video Types</h3>
+  <table>
+    <tr><th>Type</th><th>Typical Length</th><th>Example Use</th></tr>
+    <tr><td><strong>Lecture</strong></td><td>20 min – 2 hours</td><td>Full lesson on Tawhid or a Fiqh ruling</td></tr>
+    <tr><td><strong>Short</strong></td><td>3 – 20 minutes</td><td>Explanation of a single hadith or ayah</td></tr>
+    <tr><td><strong>Reel</strong></td><td>Under 3 minutes</td><td>Quick reminder, tip, or daily dhikr</td></tr>
+  </table>
+
+  <h3>Quick Reference — PDF Categories</h3>
+  <table>
+    <tr><th>Category</th><th>Example</th></tr>
+    <tr><td><strong>Book</strong></td><td>Kitab al-Tawhid, Riyadh al-Salihin, Bulugh al-Maram</td></tr>
+    <tr><td><strong>Article</strong></td><td>A scholarly paper on the Fiqh of fasting</td></tr>
+    <tr><td><strong>Notes</strong></td><td>Class notes from a Tafsir course</td></tr>
+    <tr><td><strong>Worksheet</strong></td><td>Student exercises for Hadith memorisation</td></tr>
+  </table>
+
+  <h3>Quick Reference — Subject Assignments</h3>
+  <table>
+    <tr><th>If the content is about...</th><th>Choose this Subject</th></tr>
+    <tr><td>Allah, His names, pillars of faith, Tawhid</td><td><strong>Aqidah</strong></td></tr>
+    <tr><td>Quran explanation, tafsir of ayahs</td><td><strong>Tafsir</strong></td></tr>
+    <tr><td>Prophetic sayings, hadith collections</td><td><strong>Hadith</strong></td></tr>
+    <tr><td>Prayer, fasting, zakat, halal/haram rulings</td><td><strong>Fiqh</strong></td></tr>
+    <tr><td>Character, manners, spirituality, raising children</td><td><strong>Tarbiyah</strong></td></tr>
+    <tr><td>Prophet's ﷺ life, companions, Islamic history</td><td><strong>Sirah</strong></td></tr>
+  </table>
+
+  <br /><br />
+  <hr class="section-divider" />
+  <p style="text-align:center; color:#aaa; font-size:13px; margin-top:30px; font-family:sans-serif;">
+    Al-Mishkat Educational Platform &nbsp;·&nbsp; User Manual v2.0<br />
+    To save this as a PDF: press <strong>Ctrl+P</strong> (or Cmd+P on Mac) → Save as PDF
+  </p>
+
+</div>
+</body>
+</html>
